@@ -23,6 +23,7 @@ function retry {
 
 brew update
 brew install wget python cmake || true
+brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver qt glew cgal
 
 CURRDIR=$(pwd)
 
@@ -34,6 +35,8 @@ tar xzf boost_1_73_0.tar.gz
 cd boost_1_73_0
 ./bootstrap.sh --prefix=$CURRDIR/boost_install --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex clang-darwin
 ./b2 -j$(sysctl -n hw.logicalcpu) cxxflags="-fPIC" runtime-link=static variant=release link=static install
+
+echo "CURRDIR is: ${CURRDIR}"
 
 cd $CURRDIR
 mkdir -p $CURRDIR/wheelhouse_unrepaired
@@ -50,24 +53,24 @@ declare -a PYTHON_VERS=( $1 )
 split_array=(${PYTHON_VERS//@/ })
 VERSION_NUMBER=${split_array[1]}
 
+git clone https://github.com/colmap/colmap.git
+
 # Compile wheels
 for PYVER in ${PYTHON_VERS[@]}; do
     PYBIN="/usr/local/opt/$PYVER/bin"
-    "${PYBIN}/pip3" install -r ./requirements.txt
+    # "${PYBIN}/pip3" install -r ./requirements.txt
     PYTHONVER="$(basename $(dirname $PYBIN))"
-    BUILDDIR="$CURRDIR/gtsam_$PYTHONVER/gtsam_build"
+    BUILDDIR="$CURRDIR/colmap_$PYTHONVER/colmap_build"
     mkdir -p $BUILDDIR
     cd $BUILDDIR
     export PATH=$PYBIN:$PYBIN:/usr/local/bin:$ORIGPATH
     "${PYBIN}/pip3" install delocate
     
-    brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver qt glew cgal
-    
-    git clone https://github.com/colmap/colmap.git
+    cd $CURRDIR
     cd colmap
     git checkout dev
-    mkdir build
-    cd build
+    mkdir build_$PYTHONVER
+    cd build_$PYTHONVER
     cmake .. -DQt5_DIR=/usr/local/opt/qt/lib/cmake/Qt5
     make
     sudo make install
