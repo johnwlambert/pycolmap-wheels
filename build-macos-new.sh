@@ -24,7 +24,7 @@ function retry {
 brew update
 brew install wget python cmake || true
 # TODO: try without brew install of boost, but use version below
-brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver qt glew cgal
+brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver qt5 glew cgal
 
 CURRDIR=$(pwd)
 
