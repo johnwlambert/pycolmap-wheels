@@ -83,11 +83,10 @@ for PYVER in ${PYTHON_VERS[@]}; do
     # echo "PYTHON_INCLUDE_DIR:${PYTHON_INCLUDE_DIR}"
     # echo "PYTHON_LIBRARY:${PYTHON_LIBRARY}"
     
-    cmake $CURRDIR/colmap -DCMAKE_BUILD_TYPE=Release
     ec=$?
 
     cd $CURRDIR
-    git clone --recursive git@github.com:mihaidusmanu/pycolmap.git
+    git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
     cd $CURRDIR/pycolmap
 
     if [ $ec -ne 0 ]; then
