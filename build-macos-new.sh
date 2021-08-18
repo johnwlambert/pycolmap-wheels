@@ -24,7 +24,11 @@ function retry {
 brew update
 brew install wget python cmake || true
 # TODO: try without brew install of boost, but use version below
-brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver qt5 glew cgal
+brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal
+
+#brew install qt
+curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/f24e87f3f2ce8c547e596871321566bb362cd5ce/Formula/qt5.rb
+brew install ./qt5.rb
 
 CURRDIR=$(pwd)
 
@@ -70,12 +74,15 @@ for PYVER in ${PYTHON_VERS[@]}; do
     
     PYTHON_EXECUTABLE=${PYBIN}/python3
     
+    ls -ltrh /usr/local
+    ls -ltrh /usr/local/opt
+    
     cd $CURRDIR
     cd colmap
     git checkout dev
     mkdir build_$PYTHONVER
     cd build_$PYTHONVER
-    cmake .. -DQt5_DIR=/usr/local/opt/qt/lib/cmake/Qt5
+    cmake .. #-DQt5_DIR=/usr/local/opt/qt/lib/cmake/Qt5
 
     # examine exit code of last command
     ec=$?
