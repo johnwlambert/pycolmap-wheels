@@ -31,7 +31,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-project(PYLORANSAC)
+project(LORANSAC)
 
 set(COLMAP_VERSION "3.7")
 set(COLMAP_VERSION_NUMBER "3700")
@@ -195,7 +195,7 @@ install(DIRECTORY src/
         DESTINATION include/colmap
         FILES_MATCHING PATTERN "*.h")
 install(DIRECTORY lib/
-        DESTINATION include/pyloransac/lib
+        DESTINATION include/loransac/lib
         FILES_MATCHING REGEX ".*[.]h|.*[.]hpp|.*[.]inl")
 
 # Generate and install CMake configuration.
@@ -225,12 +225,5 @@ endif()
 if(UNIX AND NOT APPLE)
     install(FILES "doc/COLMAP.desktop" DESTINATION "share/applications")
 endif()
-
-# Configure the uninstallation script.
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CMakeUninstall.cmake.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake"
-               IMMEDIATE @ONLY)
-add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake)
-set_target_properties(uninstall PROPERTIES FOLDER ${CMAKE_TARGETS_ROOT_FOLDER})
 
 
