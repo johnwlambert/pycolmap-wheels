@@ -23,6 +23,7 @@ function retry {
 
 brew update
 brew install wget python cmake || true
+# TODO: try without brew install of boost, but use version below
 brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver qt glew cgal
 
 CURRDIR=$(pwd)
@@ -58,13 +59,16 @@ git clone https://github.com/colmap/colmap.git
 # Compile wheels
 for PYVER in ${PYTHON_VERS[@]}; do
     PYBIN="/usr/local/opt/$PYVER/bin"
-    # "${PYBIN}/pip3" install -r ./requirements.txt
+
     PYTHONVER="$(basename $(dirname $PYBIN))"
     BUILDDIR="$CURRDIR/colmap_$PYTHONVER/colmap_build"
     mkdir -p $BUILDDIR
     cd $BUILDDIR
     export PATH=$PYBIN:$PYBIN:/usr/local/bin:$ORIGPATH
+    # see https://pypi.org/project/delocate/ for more details
     "${PYBIN}/pip3" install delocate
+    
+    PYTHON_EXECUTABLE=${PYBIN}/python3
     
     cd $CURRDIR
     cd colmap
@@ -72,22 +76,9 @@ for PYVER in ${PYTHON_VERS[@]}; do
     mkdir build_$PYTHONVER
     cd build_$PYTHONVER
     cmake .. -DQt5_DIR=/usr/local/opt/qt/lib/cmake/Qt5
-    make
-    sudo make install
-    
-    PYTHON_EXECUTABLE=${PYBIN}/python3
-    #PYTHON_INCLUDE_DIR=$( find -L ${PYBIN}/../include/ -name Python.h -exec dirname {} \; )
 
-    # echo ""
-    # echo "PYTHON_EXECUTABLE:${PYTHON_EXECUTABLE}"
-    # echo "PYTHON_INCLUDE_DIR:${PYTHON_INCLUDE_DIR}"
-    # echo "PYTHON_LIBRARY:${PYTHON_LIBRARY}"
-    
+    # examine exit code of last command
     ec=$?
-
-    cd $CURRDIR
-    git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
-    cd $CURRDIR/pycolmap
 
     if [ $ec -ne 0 ]; then
         echo "Error:"
@@ -95,11 +86,15 @@ for PYVER in ${PYTHON_VERS[@]}; do
         exit $ec
     fi
     set -e -x
+
+    NUM_LOGICAL_CPUS=$(sysctl -n hw.logicalcpu)
+    echo "Number of logical CPUs is: ${NUM_LOGICAL_CPUS}"
+    make -j $NUM_LOGICAL_CPUS install
+    sudo make install
     
-    make -j$(sysctl -n hw.logicalcpu) install
-    
-    # "${PYBIN}/pip" wheel . -w "/io/wheelhouse/"
-    cd python
+    cd $CURRDIR
+    git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
+    cd $CURRDIR/pycolmap
     
     "${PYBIN}/python3" setup.py bdist_wheel
     cp ./dist/*.whl $CURRDIR/wheelhouse_unrepaired
@@ -111,16 +106,3 @@ for whl in $CURRDIR/wheelhouse_unrepaired/*.whl; do
     delocate-wheel -w "$CURRDIR/wheelhouse" -v "$whl"
     rm $whl
 done
-
-# for whl in /io/wheelhouse/*.whl; do
-#     new_filename=$(echo $whl | sed "s#\.none-manylinux2014_x86_64\.#.#g")
-#     new_filename=$(echo $new_filename | sed "s#\.manylinux2014_x86_64\.#.#g") # For 37 and 38
-#     new_filename=$(echo $new_filename | sed "s#-none-#-#g")
-#     mv $whl $new_filename
-# done
-
-# Install packages and test
-# for PYBIN in /opt/python/*/bin/; do
-#     "${PYBIN}/pip" install python-manylinux-demo --no-index -f /io/wheelhouse
-#     (cd "$HOME"; "${PYBIN}/nosetests" pymanylinuxdemo)
-# done
