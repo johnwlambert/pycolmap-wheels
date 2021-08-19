@@ -26,6 +26,8 @@ brew install wget python cmake || true
 # TODO: try without brew install of boost, but use version below
 brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal qt5
 
+echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profile
+
 CURRDIR=$(pwd)
 
 # Build Boost staticly
@@ -80,7 +82,7 @@ for PYVER in ${PYTHON_VERS[@]}; do
     git checkout dev
     mkdir build_$PYTHONVER
     cd build_$PYTHONVER
-    cmake .. #-DQt5_DIR=/usr/local/opt/qt/lib/cmake/Qt5
+    cmake .. -DQt5_DIR=/usr/local/opt/qt@5/lib/cmake/Qt5
 
     # examine exit code of last command
     ec=$?
