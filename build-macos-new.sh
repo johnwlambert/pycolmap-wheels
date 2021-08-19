@@ -24,11 +24,7 @@ function retry {
 brew update
 brew install wget python cmake || true
 # TODO: try without brew install of boost, but use version below
-brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal
-
-#brew install qt
-curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/f24e87f3f2ce8c547e596871321566bb362cd5ce/Formula/qt5.rb
-brew install ./qt5.rb
+brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal qt5
 
 CURRDIR=$(pwd)
 
@@ -59,6 +55,8 @@ split_array=(${PYTHON_VERS//@/ })
 VERSION_NUMBER=${split_array[1]}
 
 git clone https://github.com/colmap/colmap.git
+
+sed -i -e 's/Qt5 5.4/Qt5 5.15.2/g' colmap/CMakeLists.txt
 
 # Compile wheels
 for PYVER in ${PYTHON_VERS[@]}; do
