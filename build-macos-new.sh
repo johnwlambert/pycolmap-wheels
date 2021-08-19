@@ -29,6 +29,7 @@ brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solv
 echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profile
 
 CURRDIR=$(pwd)
+ls -ltrh $CURRDIR
 
 # Build Boost staticly
 mkdir -p boost_build
@@ -102,11 +103,10 @@ for PYVER in ${PYTHON_VERS[@]}; do
     cd $CURRDIR
     git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
     cd $CURRDIR/pycolmap
-    
-    #export OLDFLAG="\'-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=\' + extdir"
-    #export NEWFLAG="\'-DQt5_DIR=/usr/local/opt/qt@5/lib/cmake/Qt5\'"
-    #sed -i -e "s/$OLDFLAG/$NEWFLAG/g" setup.py   
-    
+    # custum version has qt cmake path arg
+    cp $CURRDIR/setup.py setup.py
+    cat setup.py
+
     "${PYBIN}/python3" setup.py bdist_wheel
     cp ./dist/*.whl $CURRDIR/wheelhouse_unrepaired
 done
