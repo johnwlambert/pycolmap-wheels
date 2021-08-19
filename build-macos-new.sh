@@ -22,9 +22,14 @@ function retry {
 }
 
 brew update
+brew upgrade
 brew install wget python cmake || true
 # TODO: try without brew install of boost, but use version below
 brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal qt5
+
+brew info gcc
+brew upgrade gcc
+brew info gcc
 
 echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profile
 
@@ -60,6 +65,12 @@ VERSION_NUMBER=${split_array[1]}
 git clone https://github.com/colmap/colmap.git
 
 sed -i -e 's/Qt5 5.4/Qt5 5.15.2/g' colmap/CMakeLists.txt
+
+for compiler in cc c++ gcc g++ clang clang++
+do
+    which $compiler
+    $compiler --version
+done
 
 # Compile wheels
 for PYVER in ${PYTHON_VERS[@]}; do
