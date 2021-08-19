@@ -103,6 +103,10 @@ for PYVER in ${PYTHON_VERS[@]}; do
     git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
     cd $CURRDIR/pycolmap
     
+    #export OLDFLAG="\'-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=\' + extdir"
+    #export NEWFLAG="\'-DQt5_DIR=/usr/local/opt/qt@5/lib/cmake/Qt5\'"
+    #sed -i -e "s/$OLDFLAG/$NEWFLAG/g" setup.py   
+    
     "${PYBIN}/python3" setup.py bdist_wheel
     cp ./dist/*.whl $CURRDIR/wheelhouse_unrepaired
 done
