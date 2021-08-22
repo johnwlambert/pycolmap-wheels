@@ -9,6 +9,8 @@ GTSAM_BRANCH="develop"
 
 echo "Num. processes to use for building: ${nproc}"
 
+sudo apt-get update
+
 # ----------- Install dependencies from the default Ubuntu repositories -----------------
 sudo apt-get install \
     git \
