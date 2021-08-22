@@ -126,8 +126,9 @@ mkdir -p /io/wheelhouse
 cd $CURRDIR
 git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
 cd pycolmap
+PLAT=manylinux2014_x86_64
 #"${PYBIN}/python" setup.py bdist_wheel --python-tag=$PYTHONVER --plat-name=$PLAT
-python3 setup.py bdist_wheel #--python-tag=$PYTHONVER --plat-name=$PLAT
+python3 setup.py bdist_wheel --plat-name=$PLAT #--python-tag=$PYTHONVER 
 
 cp ./dist/*.whl /io/wheelhouse/
 
