@@ -8,6 +8,8 @@ declare -a PYTHON_VERSION=( $1 )
 which python
 python --version
 
+pip3 install auditwheel
+
 CURRDIR=$(pwd)
 COLMAP_BRANCH="dev"
 
