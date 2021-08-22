@@ -35,16 +35,16 @@ cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
 make -j
 sudo make install
 
-
+cd $CURRDIR
 # Clone COLMAP
 git clone https://github.com/colmap/colmap.git
 cd colmap
 git checkout dev
 
 # Set the build directory
-BUILDDIR="/io/colmap_build"
-mkdir $BUILDDIR
-cd $BUILDDIR
+# BUILDDIR="/io/colmap_build"
+# mkdir $BUILDDIR
+# cd $BUILDDIR
 
 PYBIN="/opt/python/$PYTHON_VERSION/bin"
 PYVER_NUM=$($PYBIN/python -c "import sys;print(sys.version.split(\" \")[0])")
@@ -64,7 +64,9 @@ echo "PYTHON_INCLUDE_DIR:${PYTHON_INCLUDE_DIR}"
 echo "PYTHON_LIBRARY:${PYTHON_LIBRARY}"
 echo ""
 
-cmake /gtsam -DCMAKE_BUILD_TYPE=Release \
+cd $CURRDIR
+mkdir -p $CURRDIR/colmap/colmap_build
+cmake $CURRDIR/colmap/colmap_build -DCMAKE_BUILD_TYPE=Release 
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
