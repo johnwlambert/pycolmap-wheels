@@ -7,6 +7,8 @@
 CURRDIR=$(pwd)
 GTSAM_BRANCH="develop"
 
+echo "Num processes {$nproc}"
+
 # Install dependencies from the default Ubuntu repositories:
 sudo apt-get install \
     git \
@@ -38,7 +40,7 @@ git checkout $(git describe --tags) # Checkout the latest release
 mkdir build
 cd build
 cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
-make -j
+make -j$(nproc)
 sudo make install
 
 cd $CURRDIR
