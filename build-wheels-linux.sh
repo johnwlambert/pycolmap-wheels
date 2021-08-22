@@ -7,9 +7,9 @@
 CURRDIR=$(pwd)
 GTSAM_BRANCH="develop"
 
-echo "Num processes {$nproc}"
+echo "Num. processes to use for building: ${nproc}"
 
-# Install dependencies from the default Ubuntu repositories:
+# ----------- Install dependencies from the default Ubuntu repositories -----------------
 sudo apt-get install \
     git \
     cmake \
@@ -30,7 +30,7 @@ sudo apt-get install \
     libcgal-dev
 sudo apt-get install libcgal-qt5-dev
 
-# Install CERES solver
+# ----------- Install CERES solver -------------------------------------------------------
 sudo apt install libeigen3-dev # was not in COLMAP instructions
 sudo apt-get install libatlas-base-dev libsuitesparse-dev
 sudo apt-get install libgoogle-glog-dev libgflags-dev # was not in COLMAP instructions
@@ -44,7 +44,7 @@ make -j$(nproc)
 sudo make install
 
 cd $CURRDIR
-# Clone COLMAP
+# ---------------- Clone COLMAP ----------------------------------------------------------
 git clone https://github.com/colmap/colmap.git
 cd colmap
 git checkout dev
@@ -73,8 +73,10 @@ echo "PYTHON_LIBRARY:${PYTHON_LIBRARY}"
 echo ""
 
 cd $CURRDIR
-mkdir -p $CURRDIR/colmap/colmap_build
-cmake $CURRDIR/colmap/colmap_build -DCMAKE_BUILD_TYPE=Release 
+BUILDDIR=$CURRDIR/colmap/colmap_build
+mkdir -p $BUILDDIR
+cd $BUILDDIR
+cmake .. -DCMAKE_BUILD_TYPE=Release 
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
@@ -87,6 +89,7 @@ sudo make -j$(nproc) install
 
 mkdir -p /io/wheelhouse
 
+cd $CURRDIR
 git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
 cd pycolmap
 "${PYBIN}/python" setup.py bdist_wheel --python-tag=$PYTHONVER --plat-name=$PLAT
