@@ -72,8 +72,29 @@ echo "PYTHON_INCLUDE_DIR:${PYTHON_INCLUDE_DIR}"
 echo "PYTHON_LIBRARY:${PYTHON_LIBRARY}"
 echo ""
 
+# ---------- Fix broken dependencies -----
+
 # try new boost install
 sudo apt-get install libboost-all-dev
+sudo apt-get install git
+sudo apt-get install cmake
+sudo apt-get install build-essential
+sudo apt-get install libboost-program-options-dev
+sudo apt-get install libboost-filesystem-dev
+sudo apt-get install libboost-graph-dev
+sudo apt-get install libboost-system-dev
+sudo apt-get install libboost-test-dev
+sudo apt-get install libeigen3-dev
+sudo apt-get install libsuitesparse-dev
+sudo apt-get install libfreeimage-dev
+sudo apt-get install libgoogle-glog-dev
+sudo apt-get install libgflags-dev
+sudo apt-get install libglew-dev
+sudo apt-get install qtbase5-dev
+sudo apt-get install libqt5opengl5-dev
+sudo apt-get install libcgal-dev
+sudo apt-get install libcgal-qt5-dev
+
 
 # ----------- Build COLMAP ------------------------------------------------------------
 cd $CURRDIR
