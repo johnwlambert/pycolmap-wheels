@@ -4,8 +4,12 @@
 # and https://github.com/mihaidusmanu/pycolmap#getting-started (pycolmap)
 # and http://ceres-solver.org/installation.html (Ceres)
 
+declare -a PYTHON_VERSION=( $1 )
+which python
+python --version
+
 CURRDIR=$(pwd)
-GTSAM_BRANCH="develop"
+COLMAP_BRANCH="dev"
 
 echo "Num. processes to use for building: ${nproc}"
 
@@ -120,7 +124,8 @@ mkdir -p /io/wheelhouse
 cd $CURRDIR
 git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
 cd pycolmap
-"${PYBIN}/python" setup.py bdist_wheel --python-tag=$PYTHONVER --plat-name=$PLAT
+#"${PYBIN}/python" setup.py bdist_wheel --python-tag=$PYTHONVER --plat-name=$PLAT
+python3 setup.py bdist_wheel #--python-tag=$PYTHONVER --plat-name=$PLAT
 
 cp ./dist/*.whl /io/wheelhouse/
 
