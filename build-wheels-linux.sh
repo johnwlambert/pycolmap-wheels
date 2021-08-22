@@ -72,6 +72,10 @@ echo "PYTHON_INCLUDE_DIR:${PYTHON_INCLUDE_DIR}"
 echo "PYTHON_LIBRARY:${PYTHON_LIBRARY}"
 echo ""
 
+# try new boost install
+sudo apt-get install libboost-all-dev
+
+# ----------- Build COLMAP ------------------------------------------------------------
 cd $CURRDIR
 BUILDDIR=$CURRDIR/colmap/colmap_build
 mkdir -p $BUILDDIR
@@ -89,6 +93,7 @@ sudo make -j$(nproc) install
 
 mkdir -p /io/wheelhouse
 
+# ----------- Build pycolmap wheel -----------------------------------------------------
 cd $CURRDIR
 git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
 cd pycolmap
