@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Based off of https://colmap.github.io/install.html and https://github.com/mihaidusmanu/pycolmap#getting-started
+
 CURRDIR=$(pwd)
 GTSAM_BRANCH="develop"
 
@@ -25,6 +27,7 @@ sudo apt-get install \
 sudo apt-get install libcgal-qt5-dev
 
 # Install CERES solver
+sudo apt install libeigen3-dev
 sudo apt-get install libatlas-base-dev libsuitesparse-dev
 git clone https://ceres-solver.googlesource.com/ceres-solver
 cd ceres-solver
