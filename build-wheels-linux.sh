@@ -6,6 +6,8 @@
 
 # declare -a PYTHON_VERSION=( $1 )
 
+uname -a
+
 # we cannot simply use `pip` or `python`, since points to old 2.7 version
 PYBIN="/opt/python/$PYTHON_VERSION/bin"
 PYVER_NUM=$($PYBIN/python -c "import sys;print(sys.version.split(\" \")[0])")
