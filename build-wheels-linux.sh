@@ -192,6 +192,13 @@ yum install libcgal-qt5-dev
 
 yum -y install freeimage
 
+cd $CURRDIR
+wget http://downloads.sourceforge.net/freeimage/FreeImage3180.zip
+unzip FreeImage3180.zip
+cd FreeImage
+make
+make install
+
 
 # ----------- Build COLMAP ------------------------------------------------------------
 cd $CURRDIR
