@@ -66,6 +66,9 @@ echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 export CMAKE_PREFIX_PATH="/eigen-3.3.9/cmake/"
 echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 
+ls -ltrh CMAKE_PREFIX_PATH/Eigen3Config.cmake.in
+cp $CMAKE_PREFIX_PATH/Eigen3Config.cmake.in $CMAKE_PREFIX_PATH/Eigen3Config.cmake
+
 ls -ltrh $CMAKE_PREFIX_PATH
 
 # ----------- Install CERES solver -------------------------------------------------------
