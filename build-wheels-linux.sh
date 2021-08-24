@@ -13,6 +13,8 @@ cat /etc/centos-release
 
 yum -y install wget
 
+ls -ltrh /io/
+
 # we cannot simply use `pip` or `python`, since points to old 2.7 version
 PYBIN="/opt/python/$PYTHON_VERSION/bin"
 PYVER_NUM=$($PYBIN/python -c "import sys;print(sys.version.split(\" \")[0])")
@@ -231,7 +233,7 @@ cd $CURRDIR
 git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
 cd pycolmap
 
-cp $CURRDIR/setup_centos.py setup.py
+cp /io/setup_centos.py setup.py
 cat setup.py
 
 PLAT=manylinux2014_x86_64
