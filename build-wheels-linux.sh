@@ -33,11 +33,7 @@ COLMAP_BRANCH="dev"
 
 echo "Num. processes to use for building: ${nproc}"
 
-ls -ltrh /usr/local
 
-ls -ltrh /
-
-ls -ltrh /usr
 
 # install boost
 cd $CURRDIR
@@ -45,6 +41,9 @@ yum update
 yum -y install epel-release
 yum -y install boost boost-thread boost-devel
 
+ls -ltrh /usr/local
+ls -ltrh /
+ls -ltrh /usr
 
 # apt-get update
 
