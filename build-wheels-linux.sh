@@ -73,7 +73,7 @@ cd ceres-solver
 git checkout $(git describe --tags) # Checkout the latest release
 mkdir build
 cd build
-cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH
+cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DEigen3_DIR=$CMAKE_PREFIX_PATH
 make -j$(nproc)
 make install
 
