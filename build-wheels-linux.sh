@@ -105,7 +105,7 @@ cd $CURRDIR
 # cmake ..
 # make
 
-yum install gflags-devel glog-devel
+yum -y install gflags-devel glog-devel
 
 
 cd $CURRDIR
