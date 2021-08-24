@@ -7,6 +7,8 @@
 # declare -a PYTHON_VERSION=( $1 )
 
 uname -a
+echo "Current CentOS Version:"
+cat /etc/centos-release
 
 # we cannot simply use `pip` or `python`, since points to old 2.7 version
 PYBIN="/opt/python/$PYTHON_VERSION/bin"
@@ -36,12 +38,21 @@ echo "Num. processes to use for building: ${nproc}"
 
 # install boost. colmap needs only program_options filesystem graph system unit_test_framework)
 
-cd $CURRDIR
-git clone --recursive https://github.com/boostorg/boost.git
-cd boost
-git checkout develop # or whatever branch you want to use
-./bootstrap.sh
-./b2 headers
+# cd $CURRDIR
+# git clone --recursive https://github.com/boostorg/boost.git
+# cd boost
+# git checkout develop # or whatever branch you want to use
+# ./bootstrap.sh
+# ./b2 headers
+
+# Build Boost staticly
+mkdir -p boost_build
+cd boost_build
+retry 3 wget https://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_65_1.tar.gz
+tar xzf boost_1_65_1.tar.gz
+cd boost_1_65_1
+./bootstrap.sh --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex,graph,unit_test_framework
+./b2 -j$(nproc) cxxflags="-fPIC" runtime-link=static variant=release link=static install
 
 
 # # install boost
@@ -189,7 +200,7 @@ cd $CURRDIR
 BUILDDIR=$CURRDIR/colmap/colmap_build
 mkdir -p $BUILDDIR
 cd $BUILDDIR
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON -DBOOST_ROOT=$CURRDIR/boost # /usr/local
+cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON -DBOOST_ROOT=/usr/local # $CURRDIR/boost #
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
