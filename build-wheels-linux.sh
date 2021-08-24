@@ -190,7 +190,7 @@ yum install libqt5opengl5-dev
 yum install libcgal-dev
 yum install libcgal-qt5-dev
 
-yum install freeimage
+yum -y install freeimage
 
 
 # ----------- Build COLMAP ------------------------------------------------------------
