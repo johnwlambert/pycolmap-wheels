@@ -37,8 +37,8 @@ echo "Num. processes to use for building: ${nproc}"
 # install boost
 cd $CURRDIR
 yum update
-yum install epel-release
-yum install boost boost-thread boost-devel
+yum -y install epel-release
+yum -y install boost boost-thread boost-devel
 
 
 # apt-get update
