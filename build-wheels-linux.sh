@@ -6,25 +6,6 @@
 
 # declare -a PYTHON_VERSION=( $1 )
 
-function retry {
-  local retries=$1
-  shift
-
-  local count=0
-  until "$@"; do
-    exit=$?
-    wait=$((2 ** $count))
-    count=$(($count + 1))
-    if [ $count -lt $retries ]; then
-      echo "Retry $count/$retries exited $exit, retrying in $wait seconds..."
-      sleep $wait
-    else
-      echo "Retry $count/$retries exited $exit, no more retries left."
-      return $exit
-    fi
-  done
-  return 0
-}
 
 uname -a
 echo "Current CentOS Version:"
@@ -60,28 +41,19 @@ echo "Num. processes to use for building: ${nproc}"
 
 # install boost. colmap needs only program_options filesystem graph system unit_test_framework)
 
-# cd $CURRDIR
-# git clone --recursive https://github.com/boostorg/boost.git
-# cd boost
-# git checkout develop # or whatever branch you want to use
-# ./bootstrap.sh
-# ./b2 headers
+cd $CURRDIR
 
 # Build Boost staticly
-mkdir -p boost_build
-cd boost_build
-retry 3 wget https://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_65_1.tar.gz
-tar xzf boost_1_65_1.tar.gz
-cd boost_1_65_1
-./bootstrap.sh --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex,graph,unit_test_framework
-./b2 -j$(nproc) cxxflags="-fPIC" runtime-link=static variant=release link=static install
+yum install -y wget libicu libicu-devel centos-release-scl-rh devtoolset-7-gcc-c++
 
-
-# # install boost
-# cd $CURRDIR
-# yum update
-# yum -y install epel-release
-# yum -y install boost boost-thread boost-devel
+# Download and install Boost-1.65.1
+mkdir -p boost && \
+    cd boost && \
+    wget -nv https://boostorg.jfrog.io/artifactory/main/release/1.65.1/source/boost_1_65_1.tar.gz && \
+    tar xzf boost_1_65_1.tar.gz && \
+    cd boost_1_65_1 && \
+    ./bootstrap.sh --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex,graph,unit_test_framework && \
+    ./b2 -j$(nproc) cxxflags="-fPIC" runtime-link=static variant=release link=static install
 
 ls -ltrh /usr/local
 ls -ltrh /
