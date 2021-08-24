@@ -8,17 +8,19 @@ declare -a PYTHON_VERSION=( $1 )
 which python
 python --version
 
-pip3 install auditwheel
+which pip
+pip --version
+pip install auditwheel
 
 CURRDIR=$(pwd)
 COLMAP_BRANCH="dev"
 
 echo "Num. processes to use for building: ${nproc}"
 
-sudo apt-get update
+apt-get update
 
 # ----------- Install dependencies from the default Ubuntu repositories -----------------
-sudo apt-get install \
+apt-get install \
     git \
     cmake \
     build-essential \
@@ -36,12 +38,12 @@ sudo apt-get install \
     qtbase5-dev \
     libqt5opengl5-dev \
     libcgal-dev
-sudo apt-get install libcgal-qt5-dev
+apt-get install libcgal-qt5-dev
 
 # ----------- Install CERES solver -------------------------------------------------------
-sudo apt install libeigen3-dev # was not in COLMAP instructions
-sudo apt-get install libatlas-base-dev libsuitesparse-dev
-sudo apt-get install libgoogle-glog-dev libgflags-dev # was not in COLMAP instructions
+apt install libeigen3-dev # was not in COLMAP instructions
+apt-get install libatlas-base-dev libsuitesparse-dev
+apt-get install libgoogle-glog-dev libgflags-dev # was not in COLMAP instructions
 git clone https://ceres-solver.googlesource.com/ceres-solver
 cd ceres-solver
 git checkout $(git describe --tags) # Checkout the latest release
@@ -49,7 +51,7 @@ mkdir build
 cd build
 cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
 make -j$(nproc)
-sudo make install
+make install
 
 cd $CURRDIR
 # ---------------- Clone COLMAP ----------------------------------------------------------
@@ -83,25 +85,25 @@ echo ""
 # ---------- Fix broken dependencies -----
 
 # try new boost install
-sudo apt-get install libboost-all-dev
-sudo apt-get install git
-sudo apt-get install cmake
-sudo apt-get install build-essential
-sudo apt-get install libboost-program-options-dev
-sudo apt-get install libboost-filesystem-dev
-sudo apt-get install libboost-graph-dev
-sudo apt-get install libboost-system-dev
-sudo apt-get install libboost-test-dev
-sudo apt-get install libeigen3-dev
-sudo apt-get install libsuitesparse-dev
-sudo apt-get install libfreeimage-dev
-sudo apt-get install libgoogle-glog-dev
-sudo apt-get install libgflags-dev
-sudo apt-get install libglew-dev
-sudo apt-get install qtbase5-dev
-sudo apt-get install libqt5opengl5-dev
-sudo apt-get install libcgal-dev
-sudo apt-get install libcgal-qt5-dev
+apt-get install libboost-all-dev
+apt-get install git
+apt-get install cmake
+apt-get install build-essential
+apt-get install libboost-program-options-dev
+apt-get install libboost-filesystem-dev
+apt-get install libboost-graph-dev
+apt-get install libboost-system-dev
+apt-get install libboost-test-dev
+apt-get install libeigen3-dev
+apt-get install libsuitesparse-dev
+apt-get install libfreeimage-dev
+apt-get install libgoogle-glog-dev
+apt-get install libgflags-dev
+apt-get install libglew-dev
+apt-get install qtbase5-dev
+apt-get install libqt5opengl5-dev
+apt-get install libcgal-dev
+apt-get install libcgal-qt5-dev
 
 
 # ----------- Build COLMAP ------------------------------------------------------------
@@ -118,7 +120,7 @@ if [ $ec -ne 0 ]; then
 fi
 set -e -x
 
-sudo make -j$(nproc) install
+make -j$(nproc) install
 
 mkdir -p /io/wheelhouse
 
