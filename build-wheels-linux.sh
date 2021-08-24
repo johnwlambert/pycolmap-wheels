@@ -140,7 +140,9 @@ cd ceres-solver
 git checkout $(git describe --tags) # Checkout the latest release
 mkdir build
 cd build
-cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DEigen3_DIR=$CMAKE_PREFIX_PATH
+cmake .. -DBUILD_TESTING=OFF \
+         -DBUILD_EXAMPLES=OFF \
+         -DEigen3_DIR=$CMAKE_PREFIX_PATH
 make -j$(nproc)
 make install
 
@@ -194,7 +196,11 @@ cd $CURRDIR
 BUILDDIR=$CURRDIR/colmap/colmap_build
 mkdir -p $BUILDDIR
 cd $BUILDDIR
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON -DBOOST_ROOT=/usr/local -DEigen3_DIR=$CMAKE_PREFIX_PATH # $CURRDIR/boost #
+cmake .. -DCMAKE_BUILD_TYPE=Release \
+         -DBoost_USE_STATIC_LIBS=ON \
+         -DBOOST_ROOT=/usr/local \
+         -DEIGEN3_INCLUDE_DIRS=/eigen-3.3.9
+#         -DEigen3_DIR=$CMAKE_PREFIX_PATH 
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
