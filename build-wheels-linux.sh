@@ -34,7 +34,8 @@ COLMAP_BRANCH="dev"
 echo "Num. processes to use for building: ${nproc}"
 
 
-# install boost
+# install boost. colmap needs only program_options filesystem graph system unit_test_framework)
+
 cd $CURRDIR
 git clone --recursive https://github.com/boostorg/boost.git
 cd boost
@@ -188,7 +189,7 @@ cd $CURRDIR
 BUILDDIR=$CURRDIR/colmap/colmap_build
 mkdir -p $BUILDDIR
 cd $BUILDDIR
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON -DBOOST_ROOT=/usr/local
+cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON -DBOOST_ROOT=$CURRDIR/boost # /usr/local
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
