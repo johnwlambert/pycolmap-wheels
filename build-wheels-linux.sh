@@ -34,12 +34,20 @@ COLMAP_BRANCH="dev"
 echo "Num. processes to use for building: ${nproc}"
 
 
-
 # install boost
 cd $CURRDIR
-yum update
-yum -y install epel-release
-yum -y install boost boost-thread boost-devel
+git clone --recursive https://github.com/boostorg/boost.git
+cd boost
+git checkout develop # or whatever branch you want to use
+./bootstrap.sh
+./b2 headers
+
+
+# # install boost
+# cd $CURRDIR
+# yum update
+# yum -y install epel-release
+# yum -y install boost boost-thread boost-devel
 
 ls -ltrh /usr/local
 ls -ltrh /
