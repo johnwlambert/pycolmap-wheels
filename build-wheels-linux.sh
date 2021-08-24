@@ -194,6 +194,7 @@ yum install libcgal-qt5-dev
 
 yum -y install freeimage
 
+### Build FreeImage from source and install
 cd $CURRDIR
 wget http://downloads.sourceforge.net/freeimage/FreeImage3180.zip
 unzip FreeImage3180.zip
@@ -201,6 +202,8 @@ cd FreeImage
 make
 make install
 
+
+yum -y install glew-devel
 
 # ----------- Build COLMAP ------------------------------------------------------------
 cd $CURRDIR
