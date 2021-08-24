@@ -54,6 +54,7 @@ yum install \
     libcgal-dev
 yum install libcgal-qt5-dev
 
+yum install wget
 wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 tar -xvzf eigen-3.4.0.tar.gz
 
