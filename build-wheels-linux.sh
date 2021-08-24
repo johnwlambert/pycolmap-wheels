@@ -181,7 +181,7 @@ yum install libboost-system-dev
 yum install libboost-test-dev
 yum install libeigen3-dev
 yum install libsuitesparse-dev
-yum install libfreeimage-dev
+# yum install libfreeimage-dev
 yum install libgoogle-glog-dev
 yum install libgflags-dev
 yum install libglew-dev
@@ -189,6 +189,8 @@ yum install qtbase5-dev
 yum install libqt5opengl5-dev
 yum install libcgal-dev
 yum install libcgal-qt5-dev
+
+yum install freeimage
 
 
 # ----------- Build COLMAP ------------------------------------------------------------
@@ -200,7 +202,6 @@ cmake .. -DCMAKE_BUILD_TYPE=Release \
          -DBoost_USE_STATIC_LIBS=ON \
          -DBOOST_ROOT=/usr/local \
          -DEIGEN3_INCLUDE_DIRS=/eigen-3.3.9
-#         -DEigen3_DIR=$CMAKE_PREFIX_PATH 
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
