@@ -63,7 +63,7 @@ mkdir build && cd build
 cmake ..
 
 make
-make install (optional)
+make install
 
 cd $CURRDIR
 
