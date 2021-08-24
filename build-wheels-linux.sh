@@ -65,9 +65,21 @@ cmake ..
 make
 make install
 
-cd $CURRDIR
 
-yum -y install glog
+
+# yum -y install glog
+
+
+cd $CURRDIR
+git clone https://github.com/google/glog.git
+cd glog
+cmake -S . -B build -G "Unix Makefiles"
+cmake --build build
+cmake --build build --target install
+
+
+
+cd $CURRDIR
 
 
 yum -y install wget
