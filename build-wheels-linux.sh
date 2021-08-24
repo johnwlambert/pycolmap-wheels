@@ -59,7 +59,7 @@ wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 tar -xvzf eigen-3.4.0.tar.gz
 
 echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
-export CMAKE_PREFIX_PATH="/eigen-3.4.0"
+export CMAKE_PREFIX_PATH="/eigen-3.4.0/cmake/"
 echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 
 ls -ltrh $CMAKE_PREFIX_PATH
