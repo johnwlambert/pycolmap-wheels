@@ -118,6 +118,14 @@ cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DEigen3_DIR=$CMAKE_PREFIX_PAT
 make -j$(nproc)
 make install
 
+
+# install boost
+cd $CURRDIR
+yum update
+yum install epel-release
+yum install boost boost-thread boost-devel
+
+
 cd $CURRDIR
 # ---------------- Clone COLMAP ----------------------------------------------------------
 git clone https://github.com/colmap/colmap.git
