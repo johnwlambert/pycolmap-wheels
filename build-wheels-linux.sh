@@ -194,7 +194,7 @@ cd $CURRDIR
 BUILDDIR=$CURRDIR/colmap/colmap_build
 mkdir -p $BUILDDIR
 cd $BUILDDIR
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON -DBOOST_ROOT=/usr/local # $CURRDIR/boost #
+cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON -DBOOST_ROOT=/usr/local -DEigen3_DIR=$CMAKE_PREFIX_PATH # $CURRDIR/boost #
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
