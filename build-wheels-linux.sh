@@ -52,7 +52,7 @@ mkdir -p boost && \
     wget -nv https://boostorg.jfrog.io/artifactory/main/release/1.65.1/source/boost_1_65_1.tar.gz && \
     tar xzf boost_1_65_1.tar.gz && \
     cd boost_1_65_1 && \
-    ./bootstrap.sh --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex,graph,unit_test_framework && \
+    ./bootstrap.sh --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex,graph && \
     ./b2 -j$(nproc) cxxflags="-fPIC" runtime-link=static variant=release link=static install
 
 ls -ltrh /usr/local
