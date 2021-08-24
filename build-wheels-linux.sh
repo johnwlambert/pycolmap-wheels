@@ -62,6 +62,8 @@ echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 export CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH:`pwd`/eigen-3.4.0"
 echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 
+ls -ltrh $CMAKE_PREFIX_PATH
+
 # ----------- Install CERES solver -------------------------------------------------------
 yum install libeigen3-dev # was not in COLMAP instructions
 yum install libatlas-base-dev libsuitesparse-dev
@@ -71,7 +73,7 @@ cd ceres-solver
 git checkout $(git describe --tags) # Checkout the latest release
 mkdir build
 cd build
-cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
+cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH
 make -j$(nproc)
 make install
 
