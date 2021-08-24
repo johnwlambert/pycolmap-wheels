@@ -230,6 +230,10 @@ mkdir -p /io/wheelhouse
 cd $CURRDIR
 git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
 cd pycolmap
+
+cp $CURRDIR/setup_centos.py setup.py
+cat setup.py
+
 PLAT=manylinux2014_x86_64
 #"${PYBIN}/python" setup.py bdist_wheel --python-tag=$PYTHONVER --plat-name=$PLAT
 "${PYBIN}/python" setup.py bdist_wheel --plat-name=$PLAT #--python-tag=$PYTHONVER 
