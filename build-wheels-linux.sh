@@ -176,7 +176,7 @@ cd $CURRDIR
 BUILDDIR=$CURRDIR/colmap/colmap_build
 mkdir -p $BUILDDIR
 cd $BUILDDIR
-cmake .. -DCMAKE_BUILD_TYPE=Release 
+cmake .. -DCMAKE_BUILD_TYPE=Release -DBoost_USE_STATIC_LIBS=ON 
 
 if [ $ec -ne 0 ]; then
     echo "Error:"
