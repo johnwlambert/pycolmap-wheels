@@ -4,13 +4,26 @@
 # and https://github.com/mihaidusmanu/pycolmap#getting-started (pycolmap)
 # and http://ceres-solver.org/installation.html (Ceres)
 
-declare -a PYTHON_VERSION=( $1 )
-which python
-python --version
+# declare -a PYTHON_VERSION=( $1 )
 
-which pip
-pip --version
-pip install auditwheel
+PYBIN="/opt/python/$PYTHON_VERSION/bin"
+PYVER_NUM=$($PYBIN/python -c "import sys;print(sys.version.split(\" \")[0])")
+PYTHONVER="$(basename $(dirname $PYBIN))"
+
+echo "Python bin path: $PYBIN"
+echo "Python version number: $PYVER_NUM"
+echo "Python version: $PYTHONVER"
+
+export PATH=$PYBIN:$PATH
+
+${PYBIN}/pip install auditwheel
+
+# which python
+# python --version
+
+# which pip
+# pip --version
+# pip install auditwheel
 
 CURRDIR=$(pwd)
 COLMAP_BRANCH="dev"
