@@ -84,14 +84,14 @@ yum install libcgal-qt5-dev
 
 # version is too old 2.1 yum -y install gflags
 
-cd $CURRDIR
-git clone https://github.com/gflags/gflags.git
-cd gflags
-mkdir build && cd build
-cmake ..
+# cd $CURRDIR
+# git clone https://github.com/gflags/gflags.git
+# cd gflags
+# mkdir build && cd build
+# cmake ..
 
-make
-make install
+# make
+# make install
 
 
 
@@ -99,11 +99,13 @@ make install
 
 
 cd $CURRDIR
-git clone https://github.com/google/glog.git
-cd glog
-mkdir build && cd build
-cmake ..
-make
+# git clone https://github.com/google/glog.git
+# cd glog
+# mkdir build && cd build
+# cmake ..
+# make
+
+yum install gflags-devel glog-devel
 
 
 cd $CURRDIR
