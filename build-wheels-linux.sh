@@ -58,6 +58,10 @@ yum -y install wget
 wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 tar -xvzf eigen-3.4.0.tar.gz
 
+echo "CMAKE_PREFIX_PATH$CMAKE_PREFIX_PATH"
+export CMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH:${pwd}/eigen-3.4.0"
+echo "CMAKE_PREFIX_PATH$CMAKE_PREFIX_PATH"
+
 # ----------- Install CERES solver -------------------------------------------------------
 yum install libeigen3-dev # was not in COLMAP instructions
 yum install libatlas-base-dev libsuitesparse-dev
