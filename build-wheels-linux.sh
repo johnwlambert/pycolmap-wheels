@@ -33,7 +33,15 @@ COLMAP_BRANCH="dev"
 
 echo "Num. processes to use for building: ${nproc}"
 
-apt-get update
+
+# install boost
+cd $CURRDIR
+yum update
+yum install epel-release
+yum install boost boost-thread boost-devel
+
+
+# apt-get update
 
 # ----------- Install dependencies from the default Ubuntu repositories -----------------
 yum install \
@@ -119,11 +127,6 @@ make -j$(nproc)
 make install
 
 
-# install boost
-cd $CURRDIR
-yum update
-yum install epel-release
-yum install boost boost-thread boost-devel
 
 
 cd $CURRDIR
