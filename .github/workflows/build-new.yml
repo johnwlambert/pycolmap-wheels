@@ -22,7 +22,10 @@ jobs:
     - name: Build the Linux wheels
       run: |
         #sudo docker run --rm -e PLAT=manylinux2014_x86_64 -e PYTHON_VERSION=${{ matrix.pyversion }} -v `pwd`:/io varunagrawal/gtsam-manylinux:latest /io/build-wheels-new.sh
-        sudo ./build-wheels-linux.sh ${{ matrix.pyversion }}
+        
+        sudo docker run --rm -e PLAT=manylinux2014_x86_64 -e PYTHON_VERSION=${{ matrix.pyversion }} -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 /io/build-wheels-linux.sh ${{ matrix.pyversion }}
+        
+        # sudo ./build-wheels-linux.sh ${{ matrix.pyversion }}
         # cleanup for custom runner
         sudo chown -R $(whoami):$(whoami) .
 
@@ -31,20 +34,20 @@ jobs:
       with:
         name: gtsam-4.1.0-${{ matrix.pyversion }}-manylinux2014_x86_64.whl
         path: wheelhouse/gtsam-4.1.0-${{ matrix.pyversion }}-manylinux2014_x86_64.whl
-  mac-build:
-    name: Wrapper macOS Build
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        pyversion: ["python@3.8"]
-    steps:
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Build the macOS wheels
-      run: |
-        ./build-macos-new.sh ${{ matrix.pyversion }}
-    - name: Archive wheels
-      uses: actions/upload-artifact@v1
-      with:
-        name: wheels-macos-${{ matrix.pyversion }}
-        path: ./wheelhouse
+#   mac-build:
+#     name: Wrapper macOS Build
+#     runs-on: macos-latest
+#     strategy:
+#       matrix:
+#         pyversion: ["python@3.8"]
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@master
+#     - name: Build the macOS wheels
+#       run: |
+#         ./build-macos-new.sh ${{ matrix.pyversion }}
+#     - name: Archive wheels
+#       uses: actions/upload-artifact@v1
+#       with:
+#         name: wheels-macos-${{ matrix.pyversion }}
+#         path: ./wheelhouse
