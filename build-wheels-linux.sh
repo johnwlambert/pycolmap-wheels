@@ -55,11 +55,15 @@ yum install \
 yum install libcgal-qt5-dev
 
 yum -y install wget
-wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
-tar -xvzf eigen-3.4.0.tar.gz
+# wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+# tar -xvzf eigen-3.4.0.tar.gz
+
+wget https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
+tar -xvzf eigen-3.3.9.tar.gz
 
 echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
-export CMAKE_PREFIX_PATH="/eigen-3.4.0/cmake/"
+# export CMAKE_PREFIX_PATH="/eigen-3.4.0/cmake/"
+export CMAKE_PREFIX_PATH="/eigen-3.3.9/cmake/"
 echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 
 ls -ltrh $CMAKE_PREFIX_PATH
