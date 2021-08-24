@@ -30,6 +30,8 @@ uname -a
 echo "Current CentOS Version:"
 cat /etc/centos-release
 
+yum -y install wget
+
 # we cannot simply use `pip` or `python`, since points to old 2.7 version
 PYBIN="/opt/python/$PYTHON_VERSION/bin"
 PYVER_NUM=$($PYBIN/python -c "import sys;print(sys.version.split(\" \")[0])")
@@ -135,7 +137,7 @@ make
 cd $CURRDIR
 
 
-yum -y install wget
+
 # wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 # tar -xvzf eigen-3.4.0.tar.gz
 
