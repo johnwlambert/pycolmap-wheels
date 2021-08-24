@@ -54,6 +54,9 @@ yum install \
     libcgal-dev
 yum install libcgal-qt5-dev
 
+wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+tar -xvzf eigen-3.4.0.tar.gz
+
 # ----------- Install CERES solver -------------------------------------------------------
 yum install libeigen3-dev # was not in COLMAP instructions
 yum install libatlas-base-dev libsuitesparse-dev
