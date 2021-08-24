@@ -54,7 +54,19 @@ yum install \
     libcgal-dev
 yum install libcgal-qt5-dev
 
-yum -y install gflags
+# version is too old 2.1 yum -y install gflags
+
+cd $CURRDIR
+git clone https://github.com/gflags/gflags.git
+cd gflags
+mkdir build && cd build
+cmake ..
+
+make
+make install (optional)
+
+cd $CURRDIR
+
 
 yum -y install wget
 # wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
