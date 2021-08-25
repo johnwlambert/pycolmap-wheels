@@ -27,3 +27,5 @@ This work builds off of `pycolmap` and `COLMAP`, which should be cited as well:
 pycolmap: https://github.com/mihaidusmanu/pycolmap
 
 COLMAP: https://github.com/colmap/colmap
+
+This also builds off of Fan Jiang's and Varun Agrawal's `gtsam-manylinux` repo [here](https://github.com/borglab/gtsam-manylinux-build).
