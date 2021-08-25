@@ -1,12 +1,28 @@
 
-## py-loransac
+## pycolmap Python Wheels
 
-This is a stripped down version of COLMAP that includes only Fundamental matrix, Essential matrix, and homography estimators. It provides a Python wrapper over COLMAP, exposing the high-performance LORANSAC estimators used in COLMAP.
+This repository provides functionality to build Python wheels for COLMAP.
 
-Its advantage of similar libraries such as `pycolmap` is that installation does not require a system-wide COLMAP, which can be cumbersome across platforms.
+`pycolmap` requires building COLMAP from source, and also a system-wide installation of COLMAP, along with locally building and installing `pycolmap`.
+This requires a lot of dependencies. This library makes installation as simple as `pip install pycolmap`.
+
+`pycolmap` exposes Fundamental matrix, Essential matrix, and absolute pose estimators via a Pybind wrapper. These high-performance estimators use LORANSAC.
 
 ## License
-This code is governed by the exact same license as COLMAP itself. See [here](https://github.com/colmap/colmap/blob/dev/README.md) for more details.
+This code is governed by its own license, and if you use pycolmp and COLMAP, the those respective licenses also apply. See [here](https://github.com/colmap/colmap/blob/dev/README.md) for more details.
 
 ## Citing this work
 
+
+@misc{Lambert21_pycolmapwheelbuilder,
+    author = {John Lambert},
+    title = {Pycolmap Wheelbuilder},
+    howpublished={\url{https://github.com/johnwlambert/pycolmap-wheels}},
+    year = {2021}
+}
+
+This work builds off of `pycolmap` and `COLMAP`, which should be cited as well:
+
+pycolmap: https://github.com/mihaidusmanu/pycolmap
+
+COLMAP: https://github.com/colmap/colmap
