@@ -13,13 +13,14 @@ This code is governed by its own license, and if you use pycolmp and COLMAP, the
 
 ## Citing this work
 
-
+```
 @misc{Lambert21_pycolmapwheelbuilder,
     author = {John Lambert},
     title = {Pycolmap Wheelbuilder},
     howpublished={\url{https://github.com/johnwlambert/pycolmap-wheels}},
     year = {2021}
 }
+```
 
 This work builds off of `pycolmap` and `COLMAP`, which should be cited as well:
 
