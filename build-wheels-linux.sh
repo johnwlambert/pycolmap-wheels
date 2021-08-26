@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Based off of https://colmap.github.io/install.html (COLMAP)
+# Installation based off of https://colmap.github.io/install.html (COLMAP)
 # and https://github.com/mihaidusmanu/pycolmap#getting-started (pycolmap)
 # and http://ceres-solver.org/installation.html (Ceres)
-
-# declare -a PYTHON_VERSION=( $1 )
+# However, the OS is centOS 7, instead of Ubuntu.
 
 
 uname -a
@@ -43,11 +42,10 @@ COLMAP_BRANCH="dev"
 echo "Num. processes to use for building: ${nproc}"
 
 
-# install boost. colmap needs only program_options filesystem graph system unit_test_framework)
+# ----- Install boost (build it staticly) ---------------------------------------
+# colmap needs only program_options filesystem graph system unit_test_framework)
 
 cd $CURRDIR
-
-# Build Boost staticly
 yum install -y wget libicu libicu-devel centos-release-scl-rh devtoolset-7-gcc-c++
 
 # Download and install Boost-1.65.1
@@ -59,11 +57,8 @@ mkdir -p boost && \
     ./bootstrap.sh --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex,graph,test && \
     ./b2 -j$(nproc) cxxflags="-fPIC" runtime-link=static variant=release link=static install
 
+# Boost should now be visible under /usr/local
 ls -ltrh /usr/local
-ls -ltrh /
-ls -ltrh /usr
-
-# apt-get update
 
 # ----------- Install dependencies from the default Ubuntu repositories -----------------
 yum install \
@@ -86,39 +81,24 @@ yum install \
     libcgal-dev
 yum install libcgal-qt5-dev
 
-# version is too old 2.1 yum -y install gflags
 
-# cd $CURRDIR
-# git clone https://github.com/gflags/gflags.git
-# cd gflags
-# mkdir build && cd build
-# cmake ..
-
-# make
-# make install
-
-
-
-# yum -y install glog
 
 
 cd $CURRDIR
-# git clone https://github.com/google/glog.git
-# cd glog
-# mkdir build && cd build
-# cmake ..
-# make
 
+# Note: `yum install gflags` will not work, since the version is too old (2.1)
+# Note: `yum install glog` will also not work, since the version is too old
+# Cloning and building https://github.com/google/glog.git will also not work, due to linker issues.
 yum -y install gflags-devel glog-devel
 
 
 cd $CURRDIR
 
 
-
 # wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 # tar -xvzf eigen-3.4.0.tar.gz
 
+# Using Eigen 3.3, not Eigen 3.4
 wget https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
 tar -xvzf eigen-3.3.9.tar.gz
 
@@ -127,9 +107,10 @@ echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 export CMAKE_PREFIX_PATH="/eigen-3.3.9/cmake/"
 echo "CMAKE_PREFIX_PATH -> $CMAKE_PREFIX_PATH"
 
-ls -ltrh CMAKE_PREFIX_PATH/Eigen3Config.cmake.in
-#cp $CMAKE_PREFIX_PATH/Eigen3Config.cmake.in $CMAKE_PREFIX_PATH/Eigen3Config.cmake
+ls -ltrh CMAKE_PREFIX_PATH/
 
+# While Eigen is a header-only library, it still has to be built!
+# Creates Eigen3Config.cmake from Eigen3Config.cmake.in
 cd /eigen-3.3.9
 mkdir build
 cd build
@@ -198,7 +179,7 @@ yum install libcgal-qt5-dev
 
 yum -y install freeimage
 
-### Build FreeImage from source and install
+### ------ Build FreeImage from source and install --------------------
 cd $CURRDIR
 wget http://downloads.sourceforge.net/freeimage/FreeImage3180.zip
 unzip FreeImage3180.zip
@@ -206,7 +187,7 @@ cd FreeImage
 make
 make install
 
-
+# Install GLEW
 yum -y install glew-devel
 
 # ----------- Build COLMAP ------------------------------------------------------------
