@@ -9,7 +9,7 @@ This requires a lot of dependencies. This library makes installation as simple a
 `pycolmap` exposes Fundamental matrix, Essential matrix, and absolute pose estimators via a Pybind wrapper. These high-performance estimators use LORANSAC.
 
 ## License
-This code is governed by its own license, and if you use pycolmp and COLMAP, the those respective licenses also apply. See [here](https://github.com/colmap/colmap/blob/dev/README.md) for more details.
+This code is governed by its own license, and if you use it, you are also using code from `pycolmap` and `COLMAP`, thus those respective licenses also apply. See [here](https://github.com/colmap/colmap/blob/dev/README.md) for more details.
 
 ## Citing this work
 
