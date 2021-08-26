@@ -4,7 +4,11 @@
 This repository provides functionality to build Python wheels for [`pycolmap`](https://github.com/mihaidusmanu/pycolmap), which is a Pybind interface to COLMAP's source.
 
 `pycolmap` requires building COLMAP from source, and also a system-wide installation of COLMAP, along with locally building and installing `pycolmap`.
-This requires a lot of dependencies. This library makes installation as simple as `pip install pycolmap`.
+This requires a lot of dependencies. This library makes installation as simple as
+```bash
+pip install pycolmap
+```
+Currently, only Linux is supported, but macOS support is forthcoming.
 
 `pycolmap` exposes Fundamental matrix, Essential matrix, and absolute pose estimators via a Pybind wrapper. These high-performance estimators use LORANSAC.
 
