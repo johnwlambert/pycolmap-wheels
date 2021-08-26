@@ -1,7 +1,7 @@
 
 ## pycolmap Python Wheels
 
-This repository provides functionality to build Python wheels for COLMAP.
+This repository provides functionality to build Python wheels for [`pycolmap`](https://github.com/mihaidusmanu/pycolmap), which is a Pybind interface to COLMAP's source.
 
 `pycolmap` requires building COLMAP from source, and also a system-wide installation of COLMAP, along with locally building and installing `pycolmap`.
 This requires a lot of dependencies. This library makes installation as simple as `pip install pycolmap`.
