@@ -120,6 +120,8 @@ for PYVER in ${PYTHON_VERS[@]}; do
     cp $CURRDIR/setup.py setup.py
     cat setup.py
 
+    # flags must be passed, to avoid the issue: `Unsupported compiler -- pybind11 requires C++11 support!`
+    # see https://github.com/quantumlib/qsim/issues/242 for more details
     CC=/usr/local/opt/llvm/bin/clang CXX=/usr/local/opt/llvm/bin/clang++ LDFLAGS=-L/usr/local/opt/libomp/lib "${PYBIN}/python3" setup.py bdist_wheel
     cp ./dist/*.whl $CURRDIR/wheelhouse_unrepaired
 done
