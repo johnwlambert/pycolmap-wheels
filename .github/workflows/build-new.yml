@@ -41,7 +41,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        pyversion: ["python@3.7", "python@3.8", "python@3.9"]
+        pyversion: ["python@3.8", "python@3.9"] # "python@3.7" not supported in Github Actions
     steps:
     - name: Checkout
       uses: actions/checkout@master
