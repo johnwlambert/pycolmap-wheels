@@ -27,6 +27,8 @@ brew install wget python cmake || true
 # TODO: try without brew install of boost, but use version below
 brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal qt5
 
+brew install llvm libomp
+
 brew info gcc
 brew upgrade gcc
 brew info gcc
@@ -118,7 +120,7 @@ for PYVER in ${PYTHON_VERS[@]}; do
     cp $CURRDIR/setup.py setup.py
     cat setup.py
 
-    "${PYBIN}/python3" setup.py bdist_wheel
+    CC=/usr/local/opt/llvm/bin/clang CXX=/usr/local/opt/llvm/bin/clang++ LDFLAGS=-L/usr/local/opt/libomp/lib "${PYBIN}/python3" setup.py bdist_wheel
     cp ./dist/*.whl $CURRDIR/wheelhouse_unrepaired
 done
 
