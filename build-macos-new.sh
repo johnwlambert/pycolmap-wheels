@@ -83,8 +83,8 @@ for PYVER in ${PYTHON_VERS[@]}; do
     mkdir -p $BUILDDIR
     cd $BUILDDIR
     export PATH=$PYBIN:$PYBIN:/usr/local/bin:$ORIGPATH
-    # see https://pypi.org/project/delocate/ for more details
-    "${PYBIN}/pip3" install delocate
+    # Install `delocate` -- OSX equivalent of `auditwheel` -- see https://pypi.org/project/delocate/ for more details
+    "${PYBIN}/pip3" install delocate==0.8.2
     
     PYTHON_EXECUTABLE=${PYBIN}/python3
     
