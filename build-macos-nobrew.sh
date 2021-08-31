@@ -73,10 +73,17 @@ cmake ..
 
 
 ### ------ Build FreeImage from source and install --------------------
+# see https://sourceforge.net/p/freeimage/discussion/36111/thread/6d2c294231/?limit=25#3dc5
 cd $CURRDIR
 wget http://downloads.sourceforge.net/freeimage/FreeImage3180.zip
 unzip FreeImage3180.zip
 cd FreeImage
+
+cp $CURRDIR/JXRGlueJxr.c $CURRDIR/FreeImage/Source/LibJXR/jxrgluelib/JXRGlueJxr.c
+cp $CURRDIR/segdec.c $CURRDIR/FreeImage/Source/LibJXR/image/decode/segdec.c
+cp $CURRDIR/gzlib.c $CURRDIR/FreeImage/Source/ZLib/gzlib.c
+cp $CURRDIR/gzguts.h $CURRDIR/FreeImage/Source/ZLib/gzguts.h
+
 make
 make install
 
