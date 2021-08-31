@@ -39,6 +39,16 @@ brew install llvm libomp
 # git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal qt5
 
 
+# -------- Install GFlags ------
+cd $CURRDIR
+git clone https://github.com/gflags/gflags.git
+cd gflags
+ls -ltrh .
+mkdir gflags-build && cd gflags-build && cmake ..
+make -j$NUM_LOGICAL_CPUS
+make install 
+
+
 # ---- Install glog -----
 cd $CURRDIR
 git clone https://github.com/google/glog.git
@@ -47,15 +57,6 @@ ls -ltrh .
 mkdir build && cd build && cmake ..
 make -j$NUM_LOGICAL_CPUS
 make install
-
-# -------- Install GFlags ------
-cd $CURRDIR
-git clone https://github.com/gflags/gflags.git
-cd gflags
-ls -ltrh .
-mkdir build && cd build && cmake ..
-make -j$NUM_LOGICAL_CPUS
-make install 
 
 
 # -------- Install Eigen ------
