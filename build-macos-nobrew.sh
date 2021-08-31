@@ -178,7 +178,9 @@ for PYVER in ${PYTHON_VERS[@]}; do
     cmake .. -DQt5_DIR=/usr/local/opt/qt@5/lib/cmake/Qt5 \
              -DCMAKE_BUILD_TYPE=Release \
              -DBoost_USE_STATIC_LIBS=ON \
-             -DBOOST_ROOT=/usr/local
+             -DBoost_USE_STATIC_RUNTIME=ON \
+             -DBOOST_ROOT=$CURRDIR/boost_install \
+             -DCMAKE_PREFIX_PATH=$CURRDIR/boost_install/lib/cmake/Boost-1.73.0/
 
     # examine exit code of last command
     ec=$?
