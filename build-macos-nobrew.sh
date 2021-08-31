@@ -64,11 +64,11 @@ cd $CURRDIR
 # Using Eigen 3.3, not Eigen 3.4
 wget https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
 tar -xvzf eigen-3.3.9.tar.gz
+ls -ltrh
 # While Eigen is a header-only library, it still has to be built!
 # Creates Eigen3Config.cmake from Eigen3Config.cmake.in
-cd /eigen-3.3.9
-mkdir build
-cd build
+cd $CURRDIR/eigen-3.3.9
+mkdir eigen-build && cd eigen-build
 cmake ..
 
 
@@ -79,8 +79,6 @@ unzip FreeImage3180.zip
 cd FreeImage
 make
 make install
-
-
 
 
 
