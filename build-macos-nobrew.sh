@@ -87,7 +87,7 @@ cp $CURRDIR/gzguts.h $CURRDIR/FreeImage/Source/ZLib/gzguts.h
 make
 # sudo make install
 
-
+brew install freeimage
 
 
 brew info gcc
