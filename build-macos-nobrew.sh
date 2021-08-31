@@ -36,14 +36,14 @@ brew install wget python cmake || true
 
 brew install llvm libomp
 brew info llvm
-(brew --prefix llvm)/bin
+# (brew --prefix llvm)/bin
 
 # -------- Install QT ------
 cd $CURRDIR
 git clone https://code.qt.io/qt/qt5.git
 cd qt5
 git checkout 5.15.2
-# export LLVM_INSTALL_DIR=/usr/llvm
+# export LLVM_INSTALL_DIR=/usr/local/opt/llvm # /usr/llvm
 mkdir qt5-build
 cd qt5-build
 ../qt5/configure -developer-build -opensource -nomake examples -nomake tests
