@@ -114,8 +114,8 @@ cd $CURRDIR
 git clone https://ceres-solver.googlesource.com/ceres-solver
 cd ceres-solver
 git checkout $(git describe --tags) # Checkout the latest release
-mkdir build
-cd build
+mkdir colmap-build
+cd colmap-build
 cmake .. -DBUILD_TESTING=OFF \
          -DBUILD_EXAMPLES=OFF \
          -DEigen3_DIR=$CMAKE_PREFIX_PATH
