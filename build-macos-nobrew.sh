@@ -30,7 +30,7 @@ NUM_LOGICAL_CPUS=$(sysctl -n hw.logicalcpu)
 echo "Number of logical CPUs is: ${NUM_LOGICAL_CPUS}"
 
 brew update
-brew upgrade
+#brew upgrade
 brew install wget python cmake || true
 # TODO: try without brew install of boost, but use version below
 
@@ -43,7 +43,7 @@ cd $CURRDIR
 git clone https://github.com/gflags/gflags.git
 cd gflags
 mkdir build && cd build && cmake ..
-make -j NUM_LOGICAL_CPUS
+make -j $NUM_LOGICAL_CPUS
 make install 
 
 
