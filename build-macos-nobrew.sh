@@ -46,7 +46,7 @@ git checkout 5.15.2
 # export LLVM_INSTALL_DIR=/usr/local/opt/llvm # /usr/llvm
 mkdir qt5-build
 cd qt5-build
-../qt5/configure -developer-build -opensource -nomake examples -nomake tests
+../configure -developer-build -opensource -nomake examples -nomake tests
 make -j$(nproc)
 make install
 
