@@ -85,7 +85,7 @@ cp $CURRDIR/gzlib.c $CURRDIR/FreeImage/Source/ZLib/gzlib.c
 cp $CURRDIR/gzguts.h $CURRDIR/FreeImage/Source/ZLib/gzguts.h
 
 make
-make install
+sudo make install
 
 
 
