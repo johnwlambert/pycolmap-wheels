@@ -62,7 +62,7 @@ make install
 # -------- Install Eigen ------
 cd $CURRDIR
 # Using Eigen 3.3, not Eigen 3.4
-wget https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
+wget --quiet https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
 tar -xvzf eigen-3.3.9.tar.gz
 ls -ltrh
 # While Eigen is a header-only library, it still has to be built!
@@ -75,7 +75,7 @@ cmake ..
 ### ------ Build FreeImage from source and install --------------------
 # see https://sourceforge.net/p/freeimage/discussion/36111/thread/6d2c294231/?limit=25#3dc5
 cd $CURRDIR
-wget http://downloads.sourceforge.net/freeimage/FreeImage3180.zip
+wget --quiet http://downloads.sourceforge.net/freeimage/FreeImage3180.zip
 unzip FreeImage3180.zip
 cd FreeImage
 
@@ -101,7 +101,7 @@ brew info gcc
 # --------- Build Boost staticly ----------------------
 mkdir -p boost_build
 cd boost_build
-retry 3 wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.gz
+retry 3 wget --quiet https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.gz
 tar xzf boost_1_73_0.tar.gz
 cd boost_1_73_0
 ./bootstrap.sh --prefix=$CURRDIR/boost_install --with-libraries=atomic,chrono,date_time,filesystem,graph,program_options,regex,serialization,system,test,thread,timer clang-darwin
@@ -175,7 +175,10 @@ for PYVER in ${PYTHON_VERS[@]}; do
     git checkout dev
     mkdir build_$PYTHONVER
     cd build_$PYTHONVER
-    cmake .. -DQt5_DIR=/usr/local/opt/qt@5/lib/cmake/Qt5
+    cmake .. -DQt5_DIR=/usr/local/opt/qt@5/lib/cmake/Qt5 \
+             -DCMAKE_BUILD_TYPE=Release \
+             -DBoost_USE_STATIC_LIBS=ON \
+             -DBOOST_ROOT=/usr/local
 
     # examine exit code of last command
     ec=$?
