@@ -98,15 +98,14 @@ brew info gcc
 
 
 
-# Build Boost staticly
+# --------- Build Boost staticly ----------------------
 mkdir -p boost_build
 cd boost_build
 retry 3 wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.gz
 tar xzf boost_1_73_0.tar.gz
 cd boost_1_73_0
-./bootstrap.sh --prefix=$CURRDIR/boost_install --with-libraries=serialization,filesystem,thread,system,atomic,date_time,timer,chrono,program_options,regex clang-darwin
+./bootstrap.sh --prefix=$CURRDIR/boost_install --with-libraries=atomic,chrono,date_time,filesystem,graph,program_options,regex,serialization,system,test,thread,timer clang-darwin
 ./b2 -j$(sysctl -n hw.logicalcpu) cxxflags="-fPIC" runtime-link=static variant=release link=static install
-
 
 
 # ----------- Install CERES solver -------------------------------------------------------
@@ -114,8 +113,8 @@ cd $CURRDIR
 git clone https://ceres-solver.googlesource.com/ceres-solver
 cd ceres-solver
 git checkout $(git describe --tags) # Checkout the latest release
-mkdir colmap-build
-cd colmap-build
+mkdir ceres-build
+cd ceres-build
 cmake .. -DBUILD_TESTING=OFF \
          -DBUILD_EXAMPLES=OFF \
          -DEigen3_DIR=$CMAKE_PREFIX_PATH
