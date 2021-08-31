@@ -40,8 +40,9 @@ brew install llvm libomp
 
 # -------- Install GLEW ------
 cd $CURRDIR
-git clone https://github.com/nigels-com/glew.git
-cd glew
+wget --no-check-certificate https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.tgz
+tar -xvzf glew-2.2.0.tgz
+cd glew-2.2.0
 make
 sudo make install
 make clean
