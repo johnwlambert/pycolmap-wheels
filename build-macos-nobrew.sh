@@ -38,6 +38,13 @@ brew install llvm libomp
 
 # git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal qt5
 
+# -------- Install GLEW ------
+cd $CURRDIR
+git clone https://github.com/nigels-com/glew.git
+cd glew
+make
+sudo make install
+make clean
 
 # -------- Install GFlags ------
 cd $CURRDIR
