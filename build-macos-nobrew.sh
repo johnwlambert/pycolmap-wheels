@@ -180,7 +180,8 @@ for PYVER in ${PYTHON_VERS[@]}; do
              -DBoost_USE_STATIC_LIBS=ON \
              -DBoost_USE_STATIC_RUNTIME=ON \
              -DBOOST_ROOT=$CURRDIR/boost_install \
-             -DCMAKE_PREFIX_PATH=$CURRDIR/boost_install/lib/cmake/Boost-1.73.0/
+             -DCMAKE_PREFIX_PATH=$CURRDIR/boost_install/lib/cmake/Boost-1.73.0/ \
+             -DEIGEN3_INCLUDE_DIRS=$CURRDIR/eigen-3.3.9
 
     # examine exit code of last command
     ec=$?
