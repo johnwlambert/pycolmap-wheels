@@ -53,12 +53,13 @@ class CMakeBuild(build_ext):
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
             build_args += ['--', '-j2']
+        CURRDIR="/Users/runner/work/pycolmap-wheels/pycolmap-wheels"
         cmake_args += [
             "-DBoost_USE_STATIC_LIBS=ON",
             "-DBoost_USE_STATIC_RUNTIME=ON",
-            "-DBOOST_ROOT=$CURRDIR/boost_install",
-            "-DCMAKE_PREFIX_PATH=$CURRDIR/boost_install/lib/cmake/Boost-1.73.0/",
-            "-DEIGEN3_INCLUDE_DIRS=$CURRDIR/eigen-3.3.9"
+            f"-DBOOST_ROOT={CURRDIR}/boost_install",
+            f"-DCMAKE_PREFIX_PATH={CURRDIR}/boost_install/lib/cmake/Boost-1.73.0/",
+            f"-DEIGEN3_INCLUDE_DIRS={CURRDIR}/eigen-3.3.9"
             # '-DQt5_DIR=/usr/local/opt/qt@5/lib/cmake/Qt5'
         ]
         
