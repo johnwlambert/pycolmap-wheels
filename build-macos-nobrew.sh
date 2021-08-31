@@ -43,6 +43,7 @@ brew install llvm libomp
 cd $CURRDIR
 git clone https://github.com/google/glog.git
 cd glog
+ls -ltrh .
 mkdir build && cd build && cmake ..
 make -j$NUM_LOGICAL_CPUS
 make install
@@ -51,6 +52,7 @@ make install
 cd $CURRDIR
 git clone https://github.com/gflags/gflags.git
 cd gflags
+ls -ltrh .
 mkdir build && cd build && cmake ..
 make -j$NUM_LOGICAL_CPUS
 make install 
