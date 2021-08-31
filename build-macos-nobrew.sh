@@ -85,7 +85,7 @@ cp $CURRDIR/gzlib.c $CURRDIR/FreeImage/Source/ZLib/gzlib.c
 cp $CURRDIR/gzguts.h $CURRDIR/FreeImage/Source/ZLib/gzguts.h
 
 make
-sudo make install
+# sudo make install
 
 
 
@@ -94,7 +94,7 @@ brew info gcc
 brew upgrade gcc
 brew info gcc
 
-echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profile
+# echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profile
 
 
 
