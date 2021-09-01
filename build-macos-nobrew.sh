@@ -42,7 +42,7 @@ brew info llvm
 cd $CURRDIR
 git clone https://code.qt.io/qt/qt5.git
 cd qt5
-git checkout 5.15.2
+git checkout 6.2
 # export LLVM_INSTALL_DIR=/usr/local/opt/llvm # /usr/llvm
 ./init-repository
 ./configure -developer-build -opensource -nomake examples -nomake tests
