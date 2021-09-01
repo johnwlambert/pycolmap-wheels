@@ -126,9 +126,10 @@ for PYVER in ${PYTHON_VERS[@]}; do
     cp ./dist/*.whl $CURRDIR/wheelhouse_unrepaired
 done
 
-# Bundle external shared libraries into the wheels
-for whl in $CURRDIR/wheelhouse_unrepaired/*.whl; do
-    delocate-listdeps --all "$whl"
-    delocate-wheel -w "$CURRDIR/wheelhouse" -v "$whl"
-    rm $whl
-done
+mv $CURRDIR/wheelhouse_unrepaired/*.whl $CURRDIR/wheelhouse/
+# # Bundle external shared libraries into the wheels
+# for whl in $CURRDIR/wheelhouse_unrepaired/*.whl; do
+#     delocate-listdeps --all "$whl"
+#     delocate-wheel -w "$CURRDIR/wheelhouse" -v "$whl"
+#     rm $whl
+# done
