@@ -47,7 +47,7 @@ jobs:
       uses: actions/checkout@master
     - name: Build the macOS wheels
       run: |
-        ./build-macos-nobrew.sh ${{ matrix.pyversion }}
+        ./build-macos-new.sh ${{ matrix.pyversion }}
     - name: Archive wheels
       uses: actions/upload-artifact@v1
       with:
