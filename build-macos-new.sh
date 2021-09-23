@@ -38,11 +38,6 @@ echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profil
 CURRDIR=$(pwd)
 ls -ltrh $CURRDIR
 
-# Install `delocate` -- OSX equivalent of `auditwheel` -- see https://pypi.org/project/delocate/ for more details
-cd $CURRDIR
-git clone https://github.com/matthew-brett/delocate.git
-cd delocate
-"${PYBIN}/pip3" install -e . # delocate==0.8.2
 
 
 # Build Boost staticly
@@ -91,6 +86,14 @@ for PYVER in ${PYTHON_VERS[@]}; do
     cd $BUILDDIR
     export PATH=$PYBIN:$PYBIN:/usr/local/bin:$ORIGPATH
     PYTHON_EXECUTABLE=${PYBIN}/python3
+    
+    
+    # Install `delocate` -- OSX equivalent of `auditwheel` -- see https://pypi.org/project/delocate/ for more details
+    cd $CURRDIR
+    git clone https://github.com/matthew-brett/delocate.git
+    cd delocate
+    "${PYBIN}/pip3" install -e . # delocate==0.8.2
+
     
     ls -ltrh /usr/local
     ls -ltrh /usr/local/opt
