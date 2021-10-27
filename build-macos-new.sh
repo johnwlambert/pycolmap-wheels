@@ -38,6 +38,8 @@ echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profil
 CURRDIR=$(pwd)
 ls -ltrh $CURRDIR
 
+
+
 # Build Boost staticly
 mkdir -p boost_build
 cd boost_build
@@ -83,10 +85,15 @@ for PYVER in ${PYTHON_VERS[@]}; do
     mkdir -p $BUILDDIR
     cd $BUILDDIR
     export PATH=$PYBIN:$PYBIN:/usr/local/bin:$ORIGPATH
-    # Install `delocate` -- OSX equivalent of `auditwheel` -- see https://pypi.org/project/delocate/ for more details
-    "${PYBIN}/pip3" install delocate==0.8.2
-    
     PYTHON_EXECUTABLE=${PYBIN}/python3
+    
+    
+    # Install `delocate` -- OSX equivalent of `auditwheel` -- see https://pypi.org/project/delocate/ for more details
+    cd $CURRDIR
+    git clone https://github.com/matthew-brett/delocate.git
+    cd delocate
+    "${PYBIN}/pip3" install -e . # delocate==0.8.2
+
     
     ls -ltrh /usr/local
     ls -ltrh /usr/local/opt
@@ -126,10 +133,9 @@ for PYVER in ${PYTHON_VERS[@]}; do
     cp ./dist/*.whl $CURRDIR/wheelhouse_unrepaired
 done
 
-mv $CURRDIR/wheelhouse_unrepaired/*.whl $CURRDIR/wheelhouse/
-# # Bundle external shared libraries into the wheels
-# for whl in $CURRDIR/wheelhouse_unrepaired/*.whl; do
-#     delocate-listdeps --all "$whl"
-#     delocate-wheel -w "$CURRDIR/wheelhouse" -v "$whl"
-#     rm $whl
-# done
+# Bundle external shared libraries into the wheels
+for whl in $CURRDIR/wheelhouse_unrepaired/*.whl; do
+    delocate-listdeps --all "$whl"
+    delocate-wheel -w "$CURRDIR/wheelhouse" -v "$whl"
+    rm $whl
+done
