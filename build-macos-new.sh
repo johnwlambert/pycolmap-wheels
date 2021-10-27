@@ -28,7 +28,6 @@ brew install wget python cmake || true
 brew install git cmake boost eigen freeimage glog gflags suite-sparse ceres-solver glew cgal qt5
 
 brew install llvm
-brew install clang-omp
 
 brew info gcc
 brew upgrade gcc
