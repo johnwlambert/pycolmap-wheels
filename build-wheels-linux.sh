@@ -213,7 +213,7 @@ mkdir -p /io/wheelhouse
 
 # ----------- Build pycolmap wheel -----------------------------------------------------
 cd $CURRDIR
-git clone --recursive https://github.com/mihaidusmanu/pycolmap.git
+git clone --recursive https://github.com/johnwlambert/pycolmap.git
 cd pycolmap
 
 cp /io/setup_centos.py setup.py
