@@ -90,10 +90,10 @@ for PYVER in ${PYTHON_VERS[@]}; do
     
     # Install `delocate` -- OSX equivalent of `auditwheel` -- see https://pypi.org/project/delocate/ for more details
     cd $CURRDIR
-    git clone https://github.com/matthew-brett/delocate.git
-    cd delocate
-    "${PYBIN}/pip3" install -e . # delocate==0.8.2
-
+    #git clone https://github.com/matthew-brett/delocate.git
+    #cd delocate
+    #"${PYBIN}/pip3" install -e . # delocate==0.8.2
+    "${PYBIN}/pip3" install delocate==0.10.0
     
     ls -ltrh /usr/local
     ls -ltrh /usr/local/opt
