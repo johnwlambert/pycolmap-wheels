@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        pyversion: ["cp37-cp37m","cp38-cp38"] # "cp36-cp36m",  "cp39-cp39"
+        pyversion: ["cp37-cp37m","cp38-cp38", "cp39-cp39"] # "cp36-cp36m",  
     steps:
     - name: Checkout
       uses: actions/checkout@master
