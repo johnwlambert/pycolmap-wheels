@@ -124,7 +124,10 @@ yum install libatlas-base-dev libsuitesparse-dev
 yum install libgoogle-glog-dev libgflags-dev # was not in COLMAP instructions
 git clone https://ceres-solver.googlesource.com/ceres-solver
 cd ceres-solver
-git checkout $(git describe --tags) # Checkout the latest release
+#git checkout $(git describe --tags) # Checkout the latest release
+# the tip of master is currently bugged
+git checkout c2fab6502e5a341ff644c2bb2c5171ebd882b2d6
+
 mkdir build
 cd build
 cmake .. -DBUILD_TESTING=OFF \
