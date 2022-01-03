@@ -1,3 +1,5 @@
+**NEWS**
+- January 3, 2022: This repository has been merged upstream into [pycolmap](https://github.com/mihaidusmanu/pycolmap) in a [recent PR](https://github.com/mihaidusmanu/pycolmap/commit/5cfd165b26a955634ff30e7ba6f15bd4aeefea8e). Accordingly, this repo is now deprecated.
 
 ## pycolmap Python Wheels
 
